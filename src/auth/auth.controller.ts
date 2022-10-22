@@ -1,6 +1,8 @@
 import { Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
+
+//Will handle business logic - connecting to db, editing fields, etc.
 @Controller('auth')
 export class AuthController {
   // Shorthand for setting up the constructor so you don't need .this
