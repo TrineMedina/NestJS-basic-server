@@ -26,6 +26,21 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## MyNotes
+To run the DB:
+1) Start Docker Desktop -  be sure to delete any postgresql db running
+2) Run docker compose up dev-db -d (if there's an error response that ports are not available,
+change the port in the yaml file between 5433 and 5434)
+3) Populate the DB with the Prisma schema: npx prisma migrate dev
+
+
+## MyTips
+- For Prisma: install prisma --save-dev and @prisma/client
+- Run: npx prisma init -> This will create the .env file and the Prisma folder with the schema.prism
+- To view the database: npx prisma studio -> this will open a view of the database on localhost 5555
+- To generate modules: nest g module <folder_name> -> this will create the .module.ts file under the <folder_name>
+- To generate the service file: nest g service <folder_name> --no-spec -> this will generate the .service.ts file without specs/tests
+
 ## Installation
 
 ```bash
