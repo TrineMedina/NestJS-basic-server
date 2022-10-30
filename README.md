@@ -3,6 +3,7 @@
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
@@ -27,19 +28,24 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## MyNotes
-To run the DB:
-1) Start Docker Desktop -  be sure to delete any postgresql db running
-2) Run docker compose up dev-db -d (if there's an error response that ports are not available,
-change the port in the yaml file between 5433 and 5434)
-3) Populate the DB with the Prisma schema: npx prisma migrate dev
 
+To run the DB:
+
+1) Start Docker Desktop - be sure to delete any postgresql db running
+2) run db:dev:restart - this will clear previous image, start up a new image and push prisma to it.
+3) run start:dev - no need to worry about 4 & 5 below.
+4) Run docker compose up dev-db -d (if there's an error response that ports are not available,
+   change the port in the yaml file between 5433 and 5434)
+5) Populate the DB with the Prisma schema: npx prisma migrate dev
 
 ## MyTips
+
 - For Prisma: install prisma --save-dev and @prisma/client
 - Run: npx prisma init -> This will create the .env file and the Prisma folder with the schema.prism
 - To view the database: npx prisma studio -> this will open a view of the database on localhost 5555
 - To generate modules: nest g module <folder_name> -> this will create the .module.ts file under the <folder_name>
-- To generate the service file: nest g service <folder_name> --no-spec -> this will generate the .service.ts file without specs/tests
+- To generate the service file: nest g service <folder_name> --no-spec -> this will generate the .service.ts file
+  without specs/tests
 
 ## Installation
 
@@ -75,7 +81,8 @@ $ npm run test:cov
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
+you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 

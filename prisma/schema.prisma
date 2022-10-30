@@ -15,14 +15,19 @@ model User{
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    email String
+    email String @unique
     hash String
 
-    firstName String
-    lastName String //add ? after String if optional
+    firstName String?
+    lastName String? //add ? after String if optional
+
+    races Race[]
+    @@map("users")
+
 }
 
 // Models for the database
+// @relation creates userID field in Race and links it to the id field in User model
 model Race{
     id Int @id @default(autoincrement())
     createdAt DateTime  @default(now())
@@ -35,4 +40,9 @@ model Race{
     runTime String?
     totalTime String
     totalDistance String
+
+    userId Int
+    user User @relation(fields: [userId], references: [id])
+
+    @@map("races")
 }

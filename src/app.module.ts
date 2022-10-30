@@ -1,11 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { BookmarkModule } from './race/bookmark.module';
+import { RaceModule } from './race/race.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UserModule, BookmarkModule, PrismaModule],
+  imports: [
+    ConfigModule.forRoot({
+      //This is set as true so the prisma.module can access it. Similar to @Global
+      isGlobal: true,
+    }),
+    AuthModule,
+    UserModule,
+    RaceModule,
+    PrismaModule,
+  ],
 })
 export class AppModule {}
 
