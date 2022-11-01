@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
 
@@ -17,8 +17,11 @@ export class AuthController {
     return this.authService.signup(dto);
   }
 
+  //By default, status 201 will be sent, but since we are not adding anything
+  //to the databse when signing in, 201 is more appropriate.
+  @HttpCode(HttpStatus.OK)
   @Post('signin')
-  signin(@Body() dto: AuthDto) {
+  signin(@Body() dto: AuthDto, req, res) {
     return this.authService.signin(dto);
   }
 }
