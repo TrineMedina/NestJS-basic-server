@@ -16,4 +16,8 @@ export class PrismaService extends PrismaClient {
     });
     console.log(config.get('DATABASE_URL'));
   }
+
+  cleanDb() {
+    return this.$transaction([this.user.deleteMany(), this.race.deleteMany()]); //This will ensure the user is deleted before the race
+  }
 }

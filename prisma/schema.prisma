@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 
 generator client {
   provider = "prisma-client-js"
@@ -42,7 +41,7 @@ model Race{
     totalDistance String
 
     userId Int
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id]) // You can add: onDelete: Cascade -> This will delete the user's data if the user is deleted
 
     @@map("races")
 }

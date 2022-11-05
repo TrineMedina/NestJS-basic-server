@@ -18,10 +18,11 @@ export class AuthController {
   }
 
   //By default, status 201 will be sent, but since we are not adding anything
-  //to the databse when signing in, 201 is more appropriate.
+  //to the database when signing in, 200 is more appropriate.
   @HttpCode(HttpStatus.OK)
   @Post('signin')
   signin(@Body() dto: AuthDto, req, res) {
+    console.log('signing in');
     return this.authService.signin(dto);
   }
 }
