@@ -1,0 +1,47 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+    id Int @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    email String @unique
+    hash String
+
+    firstName String?
+    lastName String? //add ? after String if optional
+
+    races Race[]
+    @@map("users")
+
+}
+
+// Models for the database
+// @relation creates userID field in Race and links it to the id field in User model
+model Race{
+    id Int @id @default(autoincrement())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime @updatedAt
+
+    name String
+    year String
+    swimTime String?
+    bikeTime String?
+    runTime String?
+    totalTime String
+    totalDistance String
+
+    userId Int
+    user User @relation(fields: [userId], references: [id]) // You can add: onDelete: Cascade -> This will delete the user's data if the user is deleted
+
+    @@map("races")
+}
