@@ -77,7 +77,7 @@ export class AuthService {
       expiresIn: '15M',
       secret: secret,
     });
-    // Returns the access token as an object
+    // Returns the access token as an object to the client
     return {
       access_token: token,
     };

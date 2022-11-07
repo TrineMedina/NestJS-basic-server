@@ -15,3 +15,11 @@ $ npm run test:e2e (this runs e2e testing)
 # production mode
 $ npm run start:prod
 ```
+
+# Tech Stack
+
+$ Language: TypeScript
+$ Server Framework: NestJS
+$ Database: PostgreSQL/Prisma -> Running on a Docker image
+$ Auth: Passport-JWT, Argon2
+$ Testing: SuperTest, Jest
