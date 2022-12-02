@@ -4,6 +4,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { AuthDto } from '../src/auth/dto';
 import * as pactum from 'pactum';
+import { EditUserDto } from '../src/user/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -94,22 +95,51 @@ describe('App e2e', () => {
           .spec()
           .post('/auth/signin')
           .withBody(dto)
-          .expectStatus(200); //You can add .inspect() to see what the call returns
+          .expectStatus(200)
+          .inspect() //You can add .inspect() to see what the call returns
+          .stores('userAuth', 'access_token'); //This will store the user token so we can user it as a variable
       });
     });
   }); //End of Auth
 
   describe('User', () => {
-    describe('Get me', () => {});
+    describe('Get me', () => {
+      it('should get current user', () => {
+        return pactum
+          .spec()
+          .get('/users/me')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAuth}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+    });
 
-    describe('Edit user', () => {});
+    describe('Edit user', () => {
+      it('should edit user', () => {
+        const dto: EditUserDto = {
+          firstName: 'Jane',
+          email: 'jane@jane.com',
+        };
+        return pactum
+          .spec()
+          .patch('/users')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAuth}',
+          })
+          .withBody(dto)
+          .expectStatus(200)
+          .inspect();
+      });
+    });
   }); //End of User
 
   describe('Race', () => {
     describe('Create Race', () => {});
-    describe('Get Races', () => {});
+    describe('Get Races by id', () => {});
     describe('Get Race by id', () => {});
-    describe('Edit race', () => {});
-    describe('Delete race', () => {});
+    describe('Edit race by id', () => {});
+    describe('Delete race by id', () => {});
   }); //End of Race
 });
